@@ -1,6 +1,7 @@
 package com.example.quizzaplikacja;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -9,9 +10,6 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.List;
 
@@ -27,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
     RadioButton radioButtonA, radioButtonB, radioButtonC;
     RadioGroup radioGroup;
     TextView textViewTresc;
-    List<Pytanie> ListaPytanInternetowych;
+    List<Pytanie> listaPytanInternetowych;
+
+    int numerPytania;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         radioButtonC = findViewById(R.id.radioButtonC);
         textViewTresc = findViewById(R.id.trescPytaniaTxt);
         radioGroup = findViewById(R.id.radioGroup);
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://my-json-server.typicode.com/JC354R/QuizServer/")
@@ -56,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, response.code(), Toast.LENGTH_SHORT).show();
                     return;
                 }
-                ListaPytanInternetowych = response.body();
-                textViewTresc.setText("Pytanie: " + ListaPytanInternetowych.get(0).getTrescPytania());
+                listaPytanInternetowych = response.body();
+                textViewTresc.setText("Pytanie: " + listaPytanInternetowych.get(0).getTrescPytania());
+                wypiszPytanie(0);
             }
 
             @Override
@@ -65,6 +67,24 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        buttonNastepne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //sprawczCzyDobrze(numerPytania);
+                numerPytania++;
+                wypiszPytanie(numerPytania);
+            }
+        });
+    }
+        
+        
+        
+        private void wypiszPytanie(int numerPytania){
+            radioGroup.clearCheck();
+            textViewTresc.setText(listaPytanInternetowych.get(numerPytania).getTrescPytania());
+            radioButtonA.setText(listaPytanInternetowych.get(numerPytania).getOdpowiedzA());
+            radioButtonB.setText(listaPytanInternetowych.get(numerPytania).getOdpowiedzB());
+            radioButtonC.setText(listaPytanInternetowych.get(numerPytania).getOdpowiedzC());
+        }
 
     }
-}
