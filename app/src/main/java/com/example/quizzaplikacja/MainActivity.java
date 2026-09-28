@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     List<Pytanie> listaPytanInternetowych;
 
     int numerPytania;
+    int punkty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 sprawczCzyDobrze(numerPytania);
                 numerPytania++;
-                wypiszPytanie(numerPytania);
+
+                if(numerPytania<listaPytanInternetowych.size()){
+                    wypiszPytanie(numerPytania);
+                }else{
+                    //koniec testu
+                    Toast.makeText(MainActivity.this, "Liczba punktow: " + punkty, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -87,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             };
 
             if(kliknieteId == indeksy[indeksPoprawny]){
+                punkty++;
                 return true;
             }
             return false;
