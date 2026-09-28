@@ -70,14 +70,27 @@ public class MainActivity extends AppCompatActivity {
         buttonNastepne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //sprawczCzyDobrze(numerPytania);
+                sprawczCzyDobrze(numerPytania);
                 numerPytania++;
                 wypiszPytanie(numerPytania);
             }
         });
     }
         
-        
+        private boolean sprawczCzyDobrze(int numerPytania){
+            int kliknieteId = radioGroup.getCheckedRadioButtonId();
+            int indeksPoprawny = listaPytanInternetowych.get(numerPytania).getPoprawna();
+            int[] indeksy = new int[]{
+                    R.id.radioButtonA,
+                    R.id.radioButtonB,
+                    R.id.radioButtonC,
+            };
+
+            if(kliknieteId == indeksy[indeksPoprawny]){
+                return true;
+            }
+            return false;
+        }
         
         private void wypiszPytanie(int numerPytania){
             radioGroup.clearCheck();
