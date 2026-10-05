@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 listaPytanInternetowych = response.body();
-                textViewTresc.setText("Pytanie: " + listaPytanInternetowych.get(0).getTrescPytania());
+                //textViewTresc.setText("Pytanie: " + listaPytanInternetowych.get(0).getTrescPytania());
                 wypiszPytanie(0);
             }
 
