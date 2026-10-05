@@ -6,7 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface JsonPlaceHolder {
-    @GET("pytania")
+    @GET("db.json")
     public Call<List<Pytanie>> getPytania(); //metoda abstrakcyjna
 
 }

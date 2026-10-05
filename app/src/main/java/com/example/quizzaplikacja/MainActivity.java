@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://my-json-server.typicode.com/JC354R/QuizServer/")
+                .baseUrl("https://raw.githubusercontent.com/JC354R/QuizServer/main/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
